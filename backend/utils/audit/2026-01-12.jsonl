@@ -1,0 +1,1 @@
+{"id": "1ab903cc-dbeb-42db-8311-3d40d586773b", "timestamp": "2026-01-12T01:30:46.323874+00:00", "nivel": "WARN", "usuario": "kainan", "origem": "AUTH", "acao": "LOGIN_FAIL", "servidor_id": null, "servidor_nome": null, "servico": null, "mensagem": "Falha ao autenticar usuário (credenciais inválidas).", "sucesso": false, "detalhe": null}

@@ -1,0 +1,521 @@
+/* =========================================================
+   APP (SISTEMA) 
+   Escopado em .app-shell (não afeta login)
+   Requer tokens no index.css:
+   --rs-dark, --rs-surface, --rs-border, --rs-text, --rs-muted,
+   --rs-white, --rs-red, --rs-red-dark, --radius-lg, --radius-md,
+   --shadow-lg, --shadow-md
+   ========================================================= */
+
+.app-shell {
+  min-height: 100vh;
+  color: var(--rs-text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  background:
+    radial-gradient(circle at top left, rgba(239,35,60,.12) 0%, rgba(2,6,23,0) 42%),
+    radial-gradient(circle at bottom right, rgba(255,255,255,.06) 0%, rgba(2,6,23,0) 40%),
+    linear-gradient(180deg, #05070f 0%, var(--rs-dark) 100%);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.app-shell .app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 28px;
+  background: rgba(5, 5, 5, 0.55);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rs-border);
+}
+
+.app-shell .app-header-left {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+
+.app-shell .app-brand {
+  background: transparent;
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  min-width: 0;
+}
+
+.app-shell .app-brand:hover .app-title-main {
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.app-shell .app-title-main {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rs-text);
+}
+
+.app-shell .app-title-sub {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--rs-text);
+}
+
+/* NAV */
+.app-shell .app-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 18px;
+  border-left: 1px solid var(--rs-border);
+}
+
+.app-shell .app-nav-link {
+  text-decoration: none;
+  color: var(--rs-muted);
+  font-size: 13px;
+  font-weight: 600;
+
+  /* ✅ antes era 10px 85px (quebrava layout) */
+  padding: 10px 80px;
+  border-radius: 999px;
+
+  transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease;
+}
+
+.app-shell .app-nav-link:hover {
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.app-shell .app-nav-link.active {
+  color: var(--rs-white);
+  background: rgba(239, 35, 60, 0.14);
+  border: 1px solid rgba(239, 35, 60, 0.22);
+}
+
+/* direita */
+.app-shell .app-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--rs-muted);
+}
+
+.app-shell .logout-button {
+  border: none;
+  cursor: pointer;
+  color: var(--rs-white);
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  background: linear-gradient(180deg, var(--rs-red) 0%, var(--rs-red-dark) 100%);
+  box-shadow: 0 12px 26px rgba(239, 35, 60, 0.28);
+  transition: transform 0.12s ease, filter 0.12s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.app-shell .logout-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+
+.app-shell .logout-button:active {
+  transform: translateY(0);
+}
+
+.app-shell .logout-button:focus {
+  outline: 2px solid rgba(239, 35, 60, 0.4);
+  outline-offset: 4px;
+}
+
+/* ✅ responsivo do header */
+@media (max-width: 780px) {
+  .app-shell .app-title-sub {
+    display: none;
+  }
+  .app-shell .app-header {
+    padding: 14px 16px;
+  }
+  .app-shell .app-nav {
+    padding-left: 12px;
+    gap: 6px;
+  }
+  .app-shell .app-nav-link {
+    padding: 8px 19px;
+  }
+}
+
+/* =========================================================
+   MAIN / PAINEL
+   ========================================================= */
+
+.app-shell .app-main {
+  padding: 42px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.app-shell .panel {
+  width: min(980px, 100%);
+  background: var(--rs-surface);
+  border: 1px solid var(--rs-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 32px;
+}
+
+.app-shell .panel-title {
+  text-align: center;
+  margin-bottom: 26px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.app-shell .center-muted {
+  text-align: center;
+  color: var(--rs-muted);
+}
+
+.app-shell .center-warn {
+  text-align: center;
+  color: #fb923c;
+  margin-bottom: 16px;
+}
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.app-shell .server-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .app-shell .server-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .app-shell .server-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   SERVER CARD
+   ========================================================= */
+
+.app-shell .server-card {
+  width: 100%;
+  border-radius: 18px;
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.75) 0%,
+    rgba(15, 23, 42, 0.45) 100%
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: var(--rs-text);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+}
+
+.app-shell .server-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
+  border-color: rgba(239, 35, 60, 0.35);
+}
+
+.app-shell .server-card-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  background: rgba(239, 35, 60, 0.14);
+  color: var(--rs-white);
+  border: 1px solid rgba(239, 35, 60, 0.3);
+}
+
+.app-shell .server-card-kicker {
+  font-size: 12px;
+  color: var(--rs-muted);
+}
+
+.app-shell .server-card-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.app-shell .server-card-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.app-shell .server-card-status {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-shell .server-card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.app-shell .server-card-status.is-online { color: #22c55e; }
+.app-shell .server-card-status.is-offline { color: #ef4444; }
+.app-shell .server-card-status.is-unknown { color: #94a3b8; }
+
+/* =========================================================
+   SERVER DETAILS — TABELA (services.msc style)
+   ========================================================= */
+
+.app-shell .panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.app-shell .panel-title-left {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.app-shell .panel-sub {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--rs-muted);
+  max-width: 64ch;
+}
+
+.app-shell .kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--rs-border);
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+.app-shell .back-link {
+  font-size: 13px;
+  color: rgba(147, 197, 253, 0.95);
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(147, 197, 253, 0.18);
+  background: rgba(147, 197, 253, 0.06);
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.app-shell .back-link:hover {
+  transform: translateY(-1px);
+  background: rgba(147, 197, 253, 0.10);
+}
+
+.app-shell .table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--rs-border);
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.app-shell .services-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 880px;
+  font-size: 14px;
+}
+
+.app-shell .services-table thead th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--rs-muted);
+  border-bottom: 1px solid var(--rs-border);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.app-shell .services-table tbody td {
+  padding: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+
+.app-shell .services-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.app-shell .svc-name {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.app-shell .svc-meta {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--rs-muted);
+}
+
+.app-shell .status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.app-shell .status-pill::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.app-shell .status-running { color: #22c55e; }
+.app-shell .status-stopped { color: #ef4444; }
+.app-shell .status-paused  { color: #f59e0b; }
+.app-shell .status-unknown { color: #94a3b8; }
+
+.app-shell .startup-pill {
+  font-size: 12px;
+  color: var(--rs-muted);
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--rs-border);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.app-shell .actions-col {
+  text-align: right;
+  width: 150px;
+}
+
+.app-shell .svc-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.app-shell .icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid var(--rs-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--rs-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.app-shell .icon-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.app-shell .icon-btn-danger {
+  color: #ef4444;
+}
+
+.app-shell .panel-foot {
+  margin-top: 16px;
+}
+
+.app-shell .muted-note {
+  font-size: 12px;
+  color: var(--rs-muted);
+}
+
+/* =========================================================
+   SERVER DETAILS — BARRA DE PESQUISA DE SERVIÇOS
+   ========================================================= */
+
+.app-shell .svc-search {
+  width: 100%;
+  max-width: 520px;
+
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 500;
+
+  color: var(--rs-text);
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid var(--rs-border);
+  border-radius: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.12s ease,
+    background 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.app-shell .svc-search::placeholder {
+  color: var(--rs-muted);
+  font-weight: 500;
+}
+
+.app-shell .svc-search:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.app-shell .svc-search:focus {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(239, 35, 60, 0.45);
+  box-shadow: 0 0 0 4px rgba(239, 35, 60, 0.15);
+}

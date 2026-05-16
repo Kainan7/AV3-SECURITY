@@ -1,0 +1,38 @@
+/* index.css (GLOBAL) */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #020617;
+  color: #e5e7eb;
+}
+
+/* Tokens globais do tema RESTART-SERVER */
+:root {
+  --rs-black: #050505;
+  --rs-dark: #0b1220;
+
+  --rs-surface: rgba(15, 23, 42, 0.62);
+  --rs-border: rgba(255, 255, 255, 0.08);
+
+  --rs-white: #ffffff;
+  --rs-text: rgba(255, 255, 255, 0.92);
+  --rs-muted: rgba(255, 255, 255, 0.68);
+
+  --rs-red: #ef233c;
+  --rs-red-dark: #c1121f;
+
+  --radius-lg: 24px;
+  --radius-md: 16px;
+
+  --shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.55);
+  --shadow-md: 0 14px 35px rgba(0, 0, 0, 0.35);
+}
